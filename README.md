@@ -48,7 +48,7 @@ This wil compile all the '.c' files and change the output's name to 'hsh'.
 =============
 $ ./hsh
 
-($) 
+($)
 
 hsh main.c shell.c
 
