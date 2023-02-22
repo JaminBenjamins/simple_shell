@@ -15,7 +15,7 @@
 /* define macros for reading and writing */
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
-#define BUF_FLUSH
+#define BUF_FLUSH -1
 
 /* macros for buffer chaining */
 #define CMD_NORM 0
@@ -91,7 +91,7 @@ typedef struct passinfo
 } info_t;
 
 #define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0 NULL, NULL, \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 	0, 0, 0}
 
 /**
@@ -143,14 +143,14 @@ char **strtow(char *, char *);
 char **strtow2(char *, char);
 
 /* functions for manipulating memory */
-char _memset(char *, char, unsigned int n);
+char *_memset(char *, char, unsigned int n);
 void ffree(char **);
-void *_realloc(void *, unsigned int n);
+void *_realloc(void *, unsigned int, unsigned int);
 int bfree(void **);
 
 /* functions for manipulating the buffer */
-int interactive(info_t);
-int is_delim(char *, char);
+int interactive(info_t *);
+int is_delim(char, char *);
 int _isalpha(int);
 int _atoi(char *);
 
@@ -170,9 +170,9 @@ int _myhistory(info_t *);
 /* function for getting input */
 int _myhistory(info_t *);
 int _myalias(info_t *);
-ssize_t get_input(info_t);
+ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
-void siginHandler(int);
+void sigintHandler(int);
 
 /* functions for handling background information */
 void clear_info(info_t *);
@@ -181,11 +181,11 @@ void free_info(info_t *, int);
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
 int _mysetenv(info_t *);
-int _myunsetenv(info_t);
+int _myunsetenv(info_t *);
 int populate_env_list(info_t *);
 char **get_environ(info_t *);
 int _unsetenv(info_t *, char *);
-int _seten(info_t *, char *, char *);
+int _setenv(info_t *, char *, char *);
 
 /* functions fo handling history */
 char *get_history_file(info_t *info);
